@@ -19,4 +19,9 @@ const PLAYERS = {
   "Mosky": { matches: 0, mvp: 0 },
   "Bylu": { matches: 0, mvp: 0 },
   "Pana Hija": { matches: 0, mvp: 0 },
-};
+// NUEVA SECCIÓN: Historial de partidos
+const MATCH_HISTORY = [
+  { fecha: "15 Oct", resultado: "Azul 5 - 3 Verde", mvp: "Turro" },
+  { fecha: "22 Oct", resultado: "Azul 2 - 4 Verde", mvp: "Kippes" },
+  { fecha: "29 Oct", resultado: "Azul 6 - 6 Verde", mvp: "Turro" },
+];
