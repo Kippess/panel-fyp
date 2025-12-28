@@ -1,5 +1,5 @@
 // 1. TOTAL DE PARTIDOS JUGADOS EN EL AÑO
-const TOTAL_MATCHES = 10;
+const TOTAL_MATCHES = 0;
 
 // 2. ESTADÍSTICAS ACUMULADAS DE JUGADORES
 // matches: cantidad de partidos a los que asistió
