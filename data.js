@@ -1,11 +1,11 @@
-const TOTAL_MATCHES = 0;
+const TOTAL_MATCHES = 1;
 
 const PLAYERS = {
-  "Kippes": { matches: 0, mvp: 0 },
-  "Alex": { matches: 0, mvp: 0 },
-  "Demencia": { matches: 0, mvp: 0 },
-  "Topa": { matches: 0, mvp: 0 },
-  "Isleño": { matches: 0, mvp: 0 },
+  "Kippes": { matches: 1, mvp: 0 },
+  "Alex": { matches: 1, mvp: 0 },
+  "Demencia": { matches: 1, mvp: 0 },
+  "Topa": { matches: 1, mvp: 1 },
+  "Isleño": { matches: 1, mvp: 0 },
   "Faculo Airbag": { matches: 0, mvp: 0 },
   "Fran Oti": { matches: 0, mvp: 0 },
   "Ponchi": { matches: 0, mvp: 0 },
