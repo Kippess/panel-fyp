@@ -1,4 +1,4 @@
-const TOTAL_MATCHES = 10;
+const TOTAL_MATCHES = 0;
 
 const PLAYERS = {
   "Kippes": { matches: 0, mvp: 0 },
