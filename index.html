@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel de FYP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<script src="data.js"></script>
+<style>
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color: white;
+  margin:0;
+  padding:20px;
+}
+h1 { text-align:center; margin-bottom:30px; }
+.cards {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.card {
+  background: rgba(255,255,255,0.1);
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  animation: fadeIn 0.6s ease;
+}
+table {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:30px;
+}
+th,td {
+  padding:10px;
+  text-align:center;
+}
+th {
+  background:#1f4e78;
+}
+tr:nth-child(even) {
+  background:rgba(255,255,255,0.05);
+}
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<h1>⚽ Panel de FYP</h1>
+
+<div class="cards">
+  <div class="card">
+    <h3>📅 Partidos Totales</h3>
+    <p id="total"></p>
+  </div>
+  <div class="card">
+    <h3>🏆 Jugador con más MVP</h3>
+    <p id="topMVP"></p>
+  </div>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Jugador</th>
+<th>Partidos</th>
+<th>MVP</th>
+<th>% Asistencia</th>
+<th>Puntaje</th>
+</tr>
+</thead>
+<tbody id="tabla"></tbody>
+</table>
+
+<script>
+document.getElementById("total").innerText = TOTAL_MATCHES;
+
+const arr = Object.entries(PLAYERS).map(([name,d])=>{
+  const asistencia = TOTAL_MATCHES ? (d.matches/TOTAL_MATCHES)*100 : 0;
+  const puntaje = (d.mvp*10) + asistencia;
+  return {name,...d,asistencia,puntaje};
+}).sort((a,b)=>b.puntaje-a.puntaje);
+
+document.getElementById("topMVP").innerText = arr.sort((a,b)=>b.mvp-a.mvp)[0].name;
+
+const tbody = document.getElementById("tabla");
+arr.forEach((p,i)=>{
+  tbody.innerHTML += `
+  <tr>
+    <td>${i+1}</td>
+    <td>${p.name}</td>
+    <td>${p.matches}</td>
+    <td>${p.mvp}</td>
+    <td>${p.asistencia.toFixed(0)}%</td>
+    <td>${p.puntaje.toFixed(1)}</td>
+  </tr>`;
+});
+</script>
+
+</body>
+</html>
