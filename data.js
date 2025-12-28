@@ -1,19 +1,19 @@
 // 1. TOTAL DE PARTIDOS JUGADOS EN EL AÑO
-const TOTAL_MATCHES = 0;
+const TOTAL_MATCHES = 10;
 
 // 2. ESTADÍSTICAS ACUMULADAS DE JUGADORES
 // matches: cantidad de partidos a los que asistió
 // mvp: cantidad de veces que fue elegido mejor jugador
 const PLAYERS = {
-  "Kippes": { matches: 0, mvp: 0 },
-  "Turro": { matches: 0, mvp: 0 },
-  "Demencia": { matches: 0, mvp: 0 },
-  "Topa": { matches: 0, mvp: 0 },
-  "Isleño": { matches: 0, mvp: 0 },
-  "Faculo Airbag": { matches: 0, mvp: 0 },
-  "Fran": { matches: 0, mvp: 0 },
-  "Ponchi": { matches: 0, mvp: 0 },
-  "Jony sucio": { matches: 0, mvp: 0 },
+  "Kippes": { matches: 10, mvp: 1 },
+  "Turro": { matches: 10, mvp: 3 },
+  "Demencia": { matches: 10, mvp: 0 },
+  "Topa": { matches: 10, mvp: 0 },
+  "Isleño": { matches: 10, mvp: 1 },
+  "Faculo Airbag": { matches: 5, mvp: 2 },
+  "Fran": { matches: 6, mvp: 4 },
+  "Ponchi": { matches: 2, mvp: 0 },
+  "Jony sucio": { matches: 2, mvp: 0 },
   "Julio Metal": { matches: 0, mvp: 0 },
   "Valencia": { matches: 0, mvp: 0 },
   "Dinho": { matches: 0, mvp: 0 },
