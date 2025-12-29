@@ -14,7 +14,7 @@ const PLAYERS = {
   "Julio Metal": { matches: 0, mvp: 0, foto: "Julio.jpg" },
   "Valencia": { matches: 0, mvp: 0, foto: "Valencia.jpg" },
   "Dinho": { matches: 0, mvp: 0, foto: "Dinho.jpg" },
-  "Novia Dinho": { matches: 0, mvp: 0, foto: "Novia.jpg" },
+  "Novia Dinho": { matches: 0, mvp: 0, foto: "Dinho.jpg" },
   "Chinche": { matches: 0, mvp: 0, foto: "Chinche.jpg" },
   "Culebra": { matches: 0, mvp: 0, foto: "Culebra.jpg" },
   "Vegui": { matches: 0, mvp: 0, foto: "Vegui.jpg" },
