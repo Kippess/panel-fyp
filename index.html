@@ -16,6 +16,9 @@
     --dark-bg: #1a1a1a;
     --card-bg: rgba(255, 255, 255, 0.07);
     --text-color: #ecf0f1;
+    --gold: #ffd700;
+    --silver: #c0c0c0;
+    --bronze: #cd7f32;
   }
 
   body {
@@ -45,6 +48,16 @@
   .top-list .player-row { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .points { color: var(--secondary); font-weight: bold; }
 
+  /* ESTILOS PREMIOS */
+  .prizes-list { list-style: none; padding: 0; margin: 0; }
+  .prize-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 5px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .prize-item:last-child { border-bottom: none; }
+  .place-badge { font-weight: 900; font-size: 1.2em; width: 30px; }
+  .prize-desc { text-align: right; font-weight: bold; font-size: 0.95em; color: #fff; }
+  .txt-gold { color: var(--gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+  .txt-silver { color: var(--silver); text-shadow: 0 0 10px rgba(192, 192, 192, 0.4); }
+  .txt-bronze { color: var(--bronze); }
+
   table { width: 100%; border-collapse: collapse; margin-top: 10px; }
   th { background: rgba(0, 150, 64, 0.3); padding: 12px; font-size: 0.8em; }
   td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; }
@@ -54,7 +67,7 @@
   .history-scroll { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
   .match-mini { min-width: 180px; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; border-left: 3px solid var(--secondary); }
 
-  /* --- NUEVOS ESTILOS PARA MODAL Y FUEGO --- */
+  /* ESTILOS MODAL Y FUEGO */
   .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
   .player-card { background: linear-gradient(135deg, #f39c12 0%, #d35400 100%); width: 280px; padding: 25px; border-radius: 20px; text-align: center; color: #1a1a1a; box-shadow: 0 0 30px rgba(243, 156, 18, 0.6); position: relative; }
   .photo-frame { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 15px; border: 4px solid #1a1a1a; overflow: hidden; background: #eee; }
@@ -94,6 +107,32 @@
   <div class="card">
     <h3>🔥 TOP 5 (2026)</h3>
     <div id="top5List" class="top-list"></div>
+  </div>
+
+  <div class="card">
+    <h3>🎁 PREMIOS TEMPORADA</h3>
+    <ul class="prizes-list">
+      <li class="prize-item">
+        <span class="place-badge txt-gold">1°</span>
+        <span class="prize-desc">💰 $100.000</span>
+      </li>
+      <li class="prize-item">
+        <span class="place-badge txt-silver">2°</span>
+        <span class="prize-desc">💰 $50.000</span>
+      </li>
+      <li class="prize-item">
+        <span class="place-badge txt-bronze">3°</span>
+        <span class="prize-desc">👕 Remera Nuevos Trapos</span>
+      </li>
+      <li class="prize-item">
+        <span class="place-badge">4°</span>
+        <span class="prize-desc">👕 Remera Nuevos Trapos</span>
+      </li>
+      <li class="prize-item">
+        <span class="place-badge">5°</span>
+        <span class="prize-desc">👕 Remera Nuevos Trapos</span>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -138,23 +177,16 @@
     const nextSunday = new Date();
     nextSunday.setDate(now.getDate() + (7 - now.getDay()) % 7);
     nextSunday.setHours(20, 0, 0, 0); 
-    
     if (now > nextSunday) nextSunday.setDate(nextSunday.getDate() + 7);
-
     const diff = nextSunday - now;
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    
-    const text = days > 0 
-      ? `Faltan ${days} días y ${hours} horas para el Domingo` 
-      : `¡HOY SE JUEGA! ⚽ Faltan ${hours} horas`;
-      
+    const text = days > 0 ? `Faltan ${days} días y ${hours} horas para el Domingo` : `¡HOY SE JUEGA! ⚽ Faltan ${hours} horas`;
     document.getElementById("countdown").innerText = text;
   }
   updateCountdown();
 
   if(typeof PLAYERS !== 'undefined') {
-    // Mostrar partidos totales
     document.getElementById("matchesCount").innerText = TOTAL_MATCHES;
 
     const data = Object.entries(PLAYERS).map(([name, d]) => {
@@ -163,6 +195,7 @@
       return { name, ...d, asistencia, score };
     }).sort((a, b) => b.score - a.score);
 
+    // Llenar Top 5
     data.slice(0, 5).forEach((p, i) => {
       const medals = ["🥇", "🥈", "🥉", "4°", "5°"];
       document.getElementById("top5List").innerHTML += `
@@ -172,6 +205,7 @@
         </div>`;
     });
 
+    // Llenar Historial
     if(typeof MATCH_HISTORY !== 'undefined'){
       MATCH_HISTORY.forEach(m => {
         document.getElementById("historyContainer").innerHTML += `
@@ -183,15 +217,12 @@
       });
     }
 
-    // Quién tiene el fuego (MVP del último partido)
-    const lastMVP = (typeof MATCH_HISTORY !== 'undefined' && MATCH_HISTORY.length > 0) 
-                    ? MATCH_HISTORY[MATCH_HISTORY.length - 1].mvp : "";
+    const lastMVP = (typeof MATCH_HISTORY !== 'undefined' && MATCH_HISTORY.length > 0) ? MATCH_HISTORY[MATCH_HISTORY.length - 1].mvp : "";
 
+    // Llenar Tabla General
     data.forEach((p, i) => {
       const hasStreak = p.name === lastMVP ? '<span class="streak-fire">🔥</span>' : '';
-      
       const row = document.createElement("tr");
-      // Al hacer click abre el modal
       row.onclick = () => openModal(p);
       row.innerHTML = `
         <td>${i+1}</td>
@@ -203,6 +234,7 @@
       document.getElementById("mainTable").appendChild(row);
     });
 
+    // Gráfico de Dona
     new Chart(document.getElementById('mvpChart'), {
       type: 'doughnut',
       data: {
@@ -217,7 +249,7 @@
     });
   }
 
-  // --- FUNCIONES DEL MODAL ---
+  // FUNCIONES MODAL
   function openModal(p) {
     document.getElementById("modalName").innerText = p.name;
     document.getElementById("modalPJ").innerText = p.matches;
@@ -226,14 +258,8 @@
     document.getElementById("modalFoto").src = p.foto || 'default.jpg';
     document.getElementById("playerModal").style.display = "flex";
   }
-
-  function closeModal() {
-    document.getElementById("playerModal").style.display = "none";
-  }
-
-  window.onclick = function(event) {
-    if (event.target == document.getElementById("playerModal")) closeModal();
-  }
+  function closeModal() { document.getElementById("playerModal").style.display = "none"; }
+  window.onclick = function(event) { if (event.target == document.getElementById("playerModal")) closeModal(); }
 </script>
 </body>
 </html>
