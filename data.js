@@ -1,5 +1,5 @@
 // Cantidad de domingos que se han jugado en total en la temporada
-const TOTAL_MATCHES = 0;
+const TOTAL_MATCHES = 1;
 
 const PLAYERS = {
   "Kippes": { matches: 1, mvp: 0, foto: "kippes.jpg" },
@@ -28,4 +28,5 @@ const PLAYERS = {
 const MATCH_HISTORY = [
   // Ejemplo de cómo anotar cuando jueguen:
   // { fecha: "05 Ene", resultado: "Verde 5 - 2 Azul", mvp: "Kippes" }
+  { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "??" }
 ];
