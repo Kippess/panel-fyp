@@ -88,7 +88,7 @@
 
 <div class="countdown-box" id="countdown">⚽ Próximo Partido: Calculando...</div>
 
-<a href="https://docs.google.com/forms/d/e/1FAIpQLScyxHaq9LRJzPDvtOmPbDL9yAscPzmjMJpFRVJTLiNtzHMG-w/viewform?usp=dialog" target="_blank" class="btn-vote">🗳️ VOTAR MVP AHORA</a>
+<a href="TU_LINK_DE_GOOGLE_FORMS" target="_blank" class="btn-vote">🗳️ VOTAR MVP AHORA</a>
 
 <div class="grid-container">
   <div class="card champion-card">
@@ -101,7 +101,9 @@
   <div class="card">
     <h3>📊 Rendimiento Actual</h3>
     <p style="text-align: center; font-weight: bold; margin-bottom: 10px;">Partidos Jugados: <span id="matchesCount" style="color:var(--secondary)">0</span></p>
-    <canvas id="mvpChart"></canvas>
+    <div style="position: relative; height:200px">
+        <canvas id="mvpChart"></canvas>
+    </div>
   </div>
 
   <div class="card">
@@ -112,26 +114,11 @@
   <div class="card">
     <h3>🎁 PREMIOS TEMPORADA</h3>
     <ul class="prizes-list">
-      <li class="prize-item">
-        <span class="place-badge txt-gold">1°</span>
-        <span class="prize-desc">💰 $100.000</span>
-      </li>
-      <li class="prize-item">
-        <span class="place-badge txt-silver">2°</span>
-        <span class="prize-desc">💰 $50.000</span>
-      </li>
-      <li class="prize-item">
-        <span class="place-badge txt-bronze">3°</span>
-        <span class="prize-desc">👕 Remera Nuevos Trapos</span>
-      </li>
-      <li class="prize-item">
-        <span class="place-badge">4°</span>
-        <span class="prize-desc">👕 Remera Nuevos Trapos</span>
-      </li>
-      <li class="prize-item">
-        <span class="place-badge">5°</span>
-        <span class="prize-desc">👕 Remera Nuevos Trapos</span>
-      </li>
+      <li class="prize-item"><span class="place-badge txt-gold">1°</span><span class="prize-desc">💰 $100.000</span></li>
+      <li class="prize-item"><span class="place-badge txt-silver">2°</span><span class="prize-desc">💰 $50.000</span></li>
+      <li class="prize-item"><span class="place-badge txt-bronze">3°</span><span class="prize-desc">👕 Remera Nuevos Trapos</span></li>
+      <li class="prize-item"><span class="place-badge">4°</span><span class="prize-desc">👕 Remera Nuevos Trapos</span></li>
+      <li class="prize-item"><span class="place-badge">5°</span><span class="prize-desc">👕 Remera Nuevos Trapos</span></li>
     </ul>
   </div>
 </div>
@@ -145,13 +132,7 @@
   <div style="overflow-x:auto;">
     <table>
       <thead>
-        <tr>
-          <th>#</th>
-          <th>Jugador</th>
-          <th>PJ</th>
-          <th>MVP</th>
-          <th>Pts</th>
-        </tr>
+        <tr><th>#</th><th>Jugador</th><th>PJ</th><th>MVP</th><th>Pts</th></tr>
       </thead>
       <tbody id="mainTable"></tbody>
     </table>
@@ -181,8 +162,7 @@
     const diff = nextSunday - now;
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const text = days > 0 ? `Faltan ${days} días y ${hours} horas para el Domingo` : `¡HOY SE JUEGA! ⚽ Faltan ${hours} horas`;
-    document.getElementById("countdown").innerText = text;
+    document.getElementById("countdown").innerText = days > 0 ? `Faltan ${days} días y ${hours} horas para el Domingo` : `¡HOY SE JUEGA! ⚽ Faltan ${hours} horas`;
   }
   updateCountdown();
 
@@ -190,9 +170,11 @@
     document.getElementById("matchesCount").innerText = TOTAL_MATCHES;
 
     const data = Object.entries(PLAYERS).map(([name, d]) => {
-      const asistencia = TOTAL_MATCHES ? (d.matches / TOTAL_MATCHES) * 100 : 0;
-      const score = (d.mvp * 15) + (d.matches * 5) + (asistencia * 0.1);
-      return { name, ...d, asistencia, score };
+      // --- AQUI ESTA EL CAMBIO DE FORMULA ---
+      // 70 puntos por MVP + 30 puntos por Partido Jugado
+      const score = (d.mvp * 70) + (d.matches * 30);
+      
+      return { name, ...d, score };
     }).sort((a, b) => b.score - a.score);
 
     // Llenar Top 5
@@ -201,11 +183,10 @@
       document.getElementById("top5List").innerHTML += `
         <div class="player-row">
           <span>${medals[i]} ${p.name}</span>
-          <span class="points">${p.score.toFixed(0)}</span>
+          <span class="points">${p.score}</span>
         </div>`;
     });
 
-    // Llenar Historial
     if(typeof MATCH_HISTORY !== 'undefined'){
       MATCH_HISTORY.forEach(m => {
         document.getElementById("historyContainer").innerHTML += `
@@ -219,7 +200,6 @@
 
     const lastMVP = (typeof MATCH_HISTORY !== 'undefined' && MATCH_HISTORY.length > 0) ? MATCH_HISTORY[MATCH_HISTORY.length - 1].mvp : "";
 
-    // Llenar Tabla General
     data.forEach((p, i) => {
       const hasStreak = p.name === lastMVP ? '<span class="streak-fire">🔥</span>' : '';
       const row = document.createElement("tr");
@@ -229,32 +209,37 @@
         <td style="text-align:left; font-weight:bold">${p.name} ${hasStreak}</td>
         <td>${p.matches}</td>
         <td>${p.mvp}</td>
-        <td style="color:var(--secondary)">${p.score.toFixed(1)}</td>
+        <td style="color:var(--secondary)">${p.score}</td>
       `;
       document.getElementById("mainTable").appendChild(row);
     });
 
-    // Gráfico de Dona
+    // Gráfico de Dona (Solo MVPs)
     new Chart(document.getElementById('mvpChart'), {
       type: 'doughnut',
       data: {
-        labels: data.slice(0,5).map(p => p.name),
+        labels: data.filter(p => p.mvp > 0).map(p => p.name),
         datasets: [{
-          data: data.slice(0,5).map(p => p.mvp),
-          backgroundColor: ['#009640', '#f39c12', '#e74c3c', '#3498db', '#9b59b6'],
+          data: data.filter(p => p.mvp > 0).map(p => p.mvp),
+          backgroundColor: ['#009640', '#f39c12', '#e74c3c', '#3498db', '#9b59b6', '#ecf0f1'],
           borderWidth: 0
         }]
       },
-      options: { plugins: { legend: { position: 'right', labels: { color: 'white', boxWidth: 10 } } } }
+      options: { 
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { 
+            legend: { position: 'right', labels: { color: 'white', boxWidth: 10 } } 
+        } 
+      }
     });
   }
 
-  // FUNCIONES MODAL
   function openModal(p) {
     document.getElementById("modalName").innerText = p.name;
     document.getElementById("modalPJ").innerText = p.matches;
     document.getElementById("modalMVP").innerText = p.mvp;
-    document.getElementById("modalPTS").innerText = p.score.toFixed(1);
+    document.getElementById("modalPTS").innerText = p.score;
     document.getElementById("modalFoto").src = p.foto || 'default.jpg';
     document.getElementById("playerModal").style.display = "flex";
   }
