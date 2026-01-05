@@ -2,7 +2,7 @@
 const TOTAL_MATCHES = 1;
 
 const PLAYERS = {
-  "Kippes": { matches: 1, mvp: 0, foto: "kippes.jpg" },
+  "Kippes": { matches: 1, mvp: 1, foto: "kippes.jpg" },
   "Turro": { matches: 0, mvp: 0, foto: "Turro.jpg" },
   "Demencia": { matches: 0, mvp: 0, foto: "Demencia.jpg" },
   "Topa": { matches: 1, mvp: 0, foto: "Topa.jpg" },
