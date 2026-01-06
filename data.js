@@ -28,5 +28,5 @@ const PLAYERS = {
 const MATCH_HISTORY = [
   // Ejemplo de cómo anotar cuando jueguen:
   // { fecha: "05 Ene", resultado: "Verde 5 - 2 Azul", mvp: "Kippes" }
-  { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "??" }
+  { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }
 ];
