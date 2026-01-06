@@ -8,7 +8,7 @@ const PLAYERS = {
   "Topa": { matches: 1, mvp: 0, foto: "Topa.jpg" },
   "Isleño": { matches: 1, mvp: 0, foto: "Isleno.jpg" },
   "Faculo Airbag": { matches: 1, mvp: 0, foto: "Faculo.jpg" },
-  "Fran": { matches: 1, mvp: 0, foto: "Fran.jpg" },
+  "Fran": { matches: 1, mvp: 1, foto: "Fran.jpg" },
   "Ponchi": { matches: 0, mvp: 0, foto: "Ponchi.jpg" },
   "Jony sucio": { matches: 0, mvp: 0, foto: "Jony.jpg" },
   "Julio Metal": { matches: 1, mvp: 0, foto: "Julio.jpg" },
