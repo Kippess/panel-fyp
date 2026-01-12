@@ -20,8 +20,8 @@ const PLAYERS = {
   "Vegui": { matches: 0, mvp: 0, foto: "Vegui.jpg" },
   "Mosky": { matches: 1, mvp: 0, foto: "Mosky.jpg" },
   "Bylu": { matches: 2, mvp: 0, foto: "Bylu.jpg" },
-  "Pana Hija": { matches: 2, mvp: 0, foto: "Pana.jpg" }
-  "DJ Manzon": { matches: 1, mvp: 0, foto: "manzon.jpg" }
+  "Pana Hija": { matches: 2, mvp: 0, foto: "Pana.jpg" }, // <-- FALTABA ESTA COMA
+  "DJ Manzon": { matches: 1, mvp: 0, foto: "manzon.jpg" }, // <-- FALTABA ESTA COMA
   "Nuno": { matches: 1, mvp: 0, foto: "nuno.jpg" }
 };
 
@@ -30,6 +30,6 @@ const PLAYERS = {
 const MATCH_HISTORY = [
   // Ejemplo de cómo anotar cuando jueguen:
   // { fecha: "05 Ene", resultado: "Verde 5 - 2 Azul", mvp: "Kippes" }
-  { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }
+  { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }, // <-- FALTABA ESTA COMA
   { fecha: "12 Ene", resultado: "Pechera 8 - 12 Sin pechera", mvp: "?" }
 ];
