@@ -1,8 +1,8 @@
 // Cantidad de domingos que se han jugado en total en la temporada
-const TOTAL_MATCHES = 2;
+const TOTAL_MATCHES = 3;
 
 const PLAYERS = {
-  "Kippes": { matches: 2, mvp: 1, foto: "kippes.jpg" },
+  "Kippes": { matches: 3, mvp: 1, foto: "kippes.jpg" },
   "Turro": { matches: 0, mvp: 0, foto: "Turro.jpg" },
   "Demencia": { matches: 0, mvp: 0, foto: "Demencia.jpg" },
   "Topa": { matches: 2, mvp: 0, foto: "Topa.jpg" },
@@ -13,16 +13,16 @@ const PLAYERS = {
   "Jony sucio": { matches: 0, mvp: 0, foto: "Jony.jpg" },
   "Julio Metal": { matches: 2, mvp: 0, foto: "Julio.jpg" },
   "Valencia": { matches: 0, mvp: 0, foto: "Valencia.jpg" },
-  "Dinho": { matches: 2, mvp: 0, foto: "Dinho.jpg" },
-  "Cinema": { matches: 1, mvp: 0, foto: "cinema.jpg" },
-  "Chinche": { matches: 2, mvp: 0, foto: "Chinche.jpg" },
-  "Culebra": { matches: 0, mvp: 0, foto: "Culebra.jpg" },
+  "Dinho": { matches: 3, mvp: 0, foto: "Dinho.jpg" },
+  "Cinema": { matches: 2, mvp: 0, foto: "cinema.jpg" },
+  "Chinche": { matches: 3, mvp: 0, foto: "Chinche.jpg" },
+  "Culebra": { matches: 1, mvp: 0, foto: "Culebra.jpg" },
   "Vegui": { matches: 0, mvp: 0, foto: "Vegui.jpg" },
   "Mosky": { matches: 1, mvp: 0, foto: "Mosky.jpg" },
   "Bylu": { matches: 2, mvp: 0, foto: "Bylu.jpg" },
   "Pana Hija": { matches: 2, mvp: 0, foto: "Pana.jpg" }, 
-  "DJ Manzon": { matches: 1, mvp: 0, foto: "manzon.jpg" }, 
-  "Nuno": { matches: 1, mvp: 0, foto: "nuno.jpg" }
+  "DJ Manzon": { matches: 2, mvp: 0, foto: "manzon.jpg" }, 
+  "Nuno": { matches: 2, mvp: 0, foto: "nuno.jpg" }
 };
 
 // Aquí irás agregando los partidos. 
@@ -32,4 +32,5 @@ const MATCH_HISTORY = [
   // { fecha: "05 Ene", resultado: "Verde 5 - 2 Azul", mvp: "Kippes" }
   { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }, 
   { fecha: "12 Ene", resultado: "Pechera 8 - 12 Sin pechera", mvp: "Kippes" },
+  { fecha: "12 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "?" },
 ];
