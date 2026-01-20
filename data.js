@@ -2,7 +2,7 @@
 const TOTAL_MATCHES = 3;
 
 const PLAYERS = {
-  "Kippes": { matches: 3, mvp: 1, foto: "kippes.jpg" },
+  "Kippes": { matches: 3, mvp: 2, foto: "kippes.jpg" },
   "Turro": { matches: 0, mvp: 0, foto: "Turro.jpg" },
   "Demencia": { matches: 0, mvp: 0, foto: "Demencia.jpg" },
   "Topa": { matches: 2, mvp: 0, foto: "Topa.jpg" },
@@ -32,5 +32,5 @@ const MATCH_HISTORY = [
   // { fecha: "05 Ene", resultado: "Verde 5 - 2 Azul", mvp: "Kippes" }
   { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }, 
   { fecha: "12 Ene", resultado: "Pechera 8 - 12 Sin pechera", mvp: "Kippes" },
-  { fecha: "12 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "?" },
+  { fecha: "12 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Kippes" },
 ];
