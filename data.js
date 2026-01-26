@@ -2,27 +2,28 @@
 const TOTAL_MATCHES = 3;
 
 const PLAYERS = {
-  "Kippes": { matches: 3, mvp: 2, foto: "kippes.jpg" },
-  "Turro": { matches: 0, mvp: 0, foto: "Turro.jpg" },
+  "Kippes": { matches: 4, mvp: 2, foto: "kippes.jpg" },
+  "Turro": { matches: 1, mvp: 0, foto: "Turro.jpg" },
   "Demencia": { matches: 0, mvp: 0, foto: "Demencia.jpg" },
-  "Topa": { matches: 2, mvp: 0, foto: "Topa.jpg" },
+  "Topa": { matches: 3, mvp: 0, foto: "Topa.jpg" },
   "Isleño": { matches: 1, mvp: 0, foto: "Isleno.jpg" },
   "Faculo Airbag": { matches: 1, mvp: 0, foto: "Faculo.jpg" },
-  "Fran": { matches: 2, mvp: 1, foto: "Fran.jpg" },
+  "Fran": { matches: 3, mvp: 1, foto: "Fran.jpg" },
   "Ponchi": { matches: 0, mvp: 0, foto: "Ponchi.jpg" },
   "Jony sucio": { matches: 0, mvp: 0, foto: "Jony.jpg" },
   "Julio Metal": { matches: 2, mvp: 0, foto: "Julio.jpg" },
   "Valencia": { matches: 0, mvp: 0, foto: "Valencia.jpg" },
   "Dinho": { matches: 3, mvp: 0, foto: "Dinho.jpg" },
   "Cinema": { matches: 2, mvp: 0, foto: "cinema.jpg" },
-  "Chinche": { matches: 3, mvp: 0, foto: "Chinche.jpg" },
+  "Chinche": { matches: 4, mvp: 0, foto: "Chinche.jpg" },
   "Culebra": { matches: 1, mvp: 0, foto: "Culebra.jpg" },
-  "Vegui": { matches: 0, mvp: 0, foto: "Vegui.jpg" },
-  "Mosky": { matches: 1, mvp: 0, foto: "Mosky.jpg" },
+  "Vegui": { matches: 1, mvp: 0, foto: "Vegui.jpg" },
+  "Mosky": { matches: 2, mvp: 0, foto: "Mosky.jpg" },
   "Bylu": { matches: 2, mvp: 0, foto: "Bylu.jpg" },
   "Pana Hija": { matches: 2, mvp: 0, foto: "Pana.jpg" }, 
-  "DJ Manzon": { matches: 2, mvp: 0, foto: "manzon.jpg" }, 
-  "Nuno": { matches: 2, mvp: 0, foto: "nuno.jpg" }
+  "DJ Manzon": { matches: 3, mvp: 0, foto: "manzon.jpg" }, 
+  "Nuno": { matches: 3, mvp: 0, foto: "nuno.jpg" }
+  "Peter": { matches: 1, mvp: 0, foto: "peter.jpg" }
 };
 
 // Aquí irás agregando los partidos. 
@@ -33,4 +34,5 @@ const MATCH_HISTORY = [
   { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }, 
   { fecha: "12 Ene", resultado: "Pechera 8 - 12 Sin pechera", mvp: "Kippes" },
   { fecha: "12 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Kippes" },
+  { fecha: "12 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "?" },
 ];
