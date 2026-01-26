@@ -22,8 +22,8 @@ const PLAYERS = {
   "Bylu": { matches: 2, mvp: 0, foto: "Bylu.jpg" },
   "Pana Hija": { matches: 2, mvp: 0, foto: "Pana.jpg" }, 
   "DJ Manzon": { matches: 3, mvp: 0, foto: "manzon.jpg" }, 
-  "Nuno": { matches: 3, mvp: 0, foto: "nuno.jpg" }
-  "Peter": { matches: 1, mvp: 0, foto: "peter.jpg" }
+  "Nuno": { matches: 3, mvp: 0, foto: "nuno.jpg" },
+  "Peter": { matches: 1, mvp: 0, foto: "peter.jpg" },
 };
 
 // Aquí irás agregando los partidos. 
