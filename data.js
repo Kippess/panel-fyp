@@ -1,5 +1,5 @@
 // Cantidad de domingos que se han jugado en total en la temporada
-const TOTAL_MATCHES = 3;
+const TOTAL_MATCHES = 4;
 
 const PLAYERS = {
   "Kippes": { matches: 4, mvp: 2, foto: "kippes.jpg" },
@@ -33,6 +33,6 @@ const MATCH_HISTORY = [
   // { fecha: "05 Ene", resultado: "Verde 5 - 2 Azul", mvp: "Kippes" }
   { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }, 
   { fecha: "12 Ene", resultado: "Pechera 8 - 12 Sin pechera", mvp: "Kippes" },
-  { fecha: "12 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Kippes" },
-  { fecha: "12 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "?" },
+  { fecha: "18 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Kippes" },
+  { fecha: "25 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "?" },
 ];
