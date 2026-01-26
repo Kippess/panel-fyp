@@ -23,7 +23,7 @@ const PLAYERS = {
   "Pana Hija": { matches: 2, mvp: 0, foto: "Pana.jpg" }, 
   "DJ Manzon": { matches: 3, mvp: 0, foto: "manzon.jpg" }, 
   "Nuno": { matches: 3, mvp: 0, foto: "nuno.jpg" },
-  "Peter": { matches: 1, mvp: 0, foto: "peter.jpg" },
+  "Peter": { matches: 1, mvp: 1, foto: "peter.jpg" },
 };
 
 // Aquí irás agregando los partidos. 
@@ -34,5 +34,5 @@ const MATCH_HISTORY = [
   { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }, 
   { fecha: "12 Ene", resultado: "Pechera 8 - 12 Sin pechera", mvp: "Kippes" },
   { fecha: "18 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Kippes" },
-  { fecha: "25 Ene", resultado: "Pechera 8 - 9 Sin pechera", mvp: "?" },
+  { fecha: "25 Ene", resultado: "Pechera 8 - 9 Sin pechera", mvp: "Peter" },
 ];
