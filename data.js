@@ -14,7 +14,7 @@ const PLAYERS = {
   "Fran": { matches: 4, mvp: 1, foto: "Fran.jpg" },
   "Ponchi": { matches: 0, mvp: 0, foto: "Ponchi.jpg" },
   "Jony sucio": { matches: 0, mvp: 0, foto: "Jony.jpg" },
-  "Julio Metal": { matches: 3, mvp: 0, foto: "Julio.jpg" },
+  "Julio Metal": { matches: 3, mvp: 1, foto: "Julio.jpg" },
   "Valencia": { matches: 0, mvp: 0, foto: "Valencia.jpg" },
   "Dinho": { matches: 3, mvp: 0, foto: "Dinho.jpg" },
   "Cinema": { matches: 2, mvp: 0, foto: "cinema.jpg" },
@@ -36,5 +36,5 @@ const MATCH_HISTORY = [
   { fecha: "12 Ene", resultado: "Pechera 8 - 12 Sin pechera", mvp: "Kippes" },
   { fecha: "18 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Kippes" },
   { fecha: "25 Ene", resultado: "Pechera 8 - 9 Sin pechera", mvp: "Peter" },
-  { fecha: "25 Ene", resultado: "Pechera 14 - 11 Sin pechera", mvp: "??" }
+  { fecha: "25 Ene", resultado: "Pechera 14 - 11 Sin pechera", mvp: "Julio Metal" }
 ];
