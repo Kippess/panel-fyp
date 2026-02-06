@@ -1,6 +1,9 @@
 // Cantidad de domingos que se han jugado en total en la temporada
 const TOTAL_MATCHES = 5;
 
+// NUEVO: Acá pones la plata recaudada (cambia el 0 por el monto real)
+const FONDO_COMUN = 0; 
+
 const PLAYERS = {
   "Kippes": { matches: 5, mvp: 2, foto: "kippes.jpg" },
   "Turro": { matches: 2, mvp: 0, foto: "Turro.jpg" },
@@ -23,17 +26,15 @@ const PLAYERS = {
   "Pana Hija": { matches: 2, mvp: 0, foto: "Pana.jpg" }, 
   "DJ Manzon": { matches: 4, mvp: 0, foto: "manzon.jpg" }, 
   "Nuno": { matches: 4, mvp: 0, foto: "nuno.jpg" },
-  "Peter": { matches: 1, mvp: 1, foto: "peter.jpg" },
+  "Peter": { matches: 1, mvp: 1, foto: "peter.jpg" }
 };
 
 // Aquí irás agregando los partidos. 
 // El último de la lista es el que activa el fuego 🔥 del MVP.
 const MATCH_HISTORY = [
-  // Ejemplo de cómo anotar cuando jueguen:
-  // { fecha: "05 Ene", resultado: "Verde 5 - 2 Azul", mvp: "Kippes" }
   { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }, 
   { fecha: "12 Ene", resultado: "Pechera 8 - 12 Sin pechera", mvp: "Kippes" },
   { fecha: "18 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Kippes" },
   { fecha: "25 Ene", resultado: "Pechera 8 - 9 Sin pechera", mvp: "Peter" },
-  { fecha: "25 Ene", resultado: "Pechera 14 - 11 Sin pechera", mvp: "??" },
+  { fecha: "25 Ene", resultado: "Pechera 14 - 11 Sin pechera", mvp: "??" }
 ];
