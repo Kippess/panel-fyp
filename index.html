@@ -39,11 +39,16 @@
   .card { background: var(--card-bg); padding: 20px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s; }
   .card:hover { transform: translateY(-5px); }
   
+  /* TARJETA DINERO */
+  .money-card { border: 2px solid #27ae60; background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(0,0,0,0.8)); text-align: center; }
+  .money-amount { font-size: 2.5em; font-weight: 900; color: #2ecc71; text-shadow: 0 0 15px rgba(46, 204, 113, 0.4); margin: 10px 0; }
+
   .champion-card { background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(0,0,0,0.8)); border: 2px solid var(--secondary); text-align: center; position: relative; overflow: hidden; }
   .champion-card::before { content: "👑 VIGENTE CAMPEÓN"; position: absolute; top: 10px; right: -30px; background: var(--secondary); color: black; padding: 5px 30px; transform: rotate(45deg); font-weight: bold; font-size: 0.8em; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
   .champion-img { width: 100%; max-height: 250px; object-fit: cover; object-position: top; border-radius: 15px; border: 2px solid rgba(255,215,0,0.3); margin-bottom: 10px; }
 
   .btn-vote { display: block; width: 100%; text-align: center; background: linear-gradient(45deg, var(--primary), #27ae60); color: white; padding: 15px 0; border-radius: 10px; text-decoration: none; font-weight: bold; text-transform: uppercase; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3); }
+  .btn-vote:hover { filter: brightness(1.2); transform: scale(1.02); transition: 0.2s; }
 
   .top-list .player-row { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .points { color: var(--secondary); font-weight: bold; }
@@ -88,9 +93,16 @@
 
 <div class="countdown-box" id="countdown">⚽ Próximo Partido: Calculando...</div>
 
-<a href="https://forms.gle/CXDK59rWCU7bjPjS9"target="_blank" class="btn-vote">🗳️ VOTAR MVP AHORA</a>
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfG1KnEwmMxVccHRgfdSz_bl562XvWSiZbHR3FK8IInFbL-tA/viewform" target="_blank" class="btn-vote">🗳️ VOTAR MVP AHORA</a>
 
 <div class="grid-container">
+  
+  <div class="card money-card">
+    <h3>💰 FONDO COMÚN</h3>
+    <div class="money-amount" id="moneyDisplay">$0</div>
+    <p style="font-size:0.8em; opacity:0.8">Recaudado para Premios/Asado</p>
+  </div>
+
   <div class="card champion-card">
     <h3>🏆 CAMPEÓN 2025</h3>
     <img src="campeon.jpg" alt="Campeón Vigente" class="champion-img">
@@ -132,7 +144,7 @@
   <div style="overflow-x:auto;">
     <table>
       <thead>
-        <tr><th>#</th><th>Jugador</th><th>PJ</th><th>MVP</th><th>Pts</th></tr>
+        <tr><th>#</th><th>Jugador</th><th>PJ</th><th>%</th><th>MVP</th><th>Pts</th></tr>
       </thead>
       <tbody id="mainTable"></tbody>
     </table>
@@ -169,11 +181,15 @@
   if(typeof PLAYERS !== 'undefined') {
     document.getElementById("matchesCount").innerText = TOTAL_MATCHES;
 
+    // MOSTRAR DINERO (Si existe la variable, sino muestra 0)
+    if(typeof FONDO_COMUN !== 'undefined') {
+        // Formatea el numero con puntos de mil (ej: 150.000)
+        document.getElementById("moneyDisplay").innerText = "$" + FONDO_COMUN.toLocaleString('es-AR');
+    }
+
     const data = Object.entries(PLAYERS).map(([name, d]) => {
-      // --- AQUI ESTA EL CAMBIO DE FORMULA ---
-      // 70 puntos por MVP + 30 puntos por Partido Jugado
+      // FORMULA: 70 x MVP + 30 x PJ
       const score = (d.mvp * 70) + (d.matches * 30);
-      
       return { name, ...d, score };
     }).sort((a, b) => b.score - a.score);
 
@@ -202,19 +218,32 @@
 
     data.forEach((p, i) => {
       const hasStreak = p.name === lastMVP ? '<span class="streak-fire">🔥</span>' : '';
+      
+      // CALCULO PORCENTAJE DE ASISTENCIA
+      let percent = 0;
+      if (TOTAL_MATCHES > 0) {
+        percent = Math.round((p.matches / TOTAL_MATCHES) * 100);
+      }
+
+      // Color del porcentaje (Rojo si falta mucho, verde si va siempre)
+      let percentColor = "#e74c3c"; // Rojo
+      if(percent >= 50) percentColor = "#f39c12"; // Naranja
+      if(percent >= 80) percentColor = "#2ecc71"; // Verde
+
       const row = document.createElement("tr");
       row.onclick = () => openModal(p);
       row.innerHTML = `
         <td>${i+1}</td>
         <td style="text-align:left; font-weight:bold">${p.name} ${hasStreak}</td>
         <td>${p.matches}</td>
+        <td style="color:${percentColor}; font-weight:bold; font-size:0.9em">${percent}%</td>
         <td>${p.mvp}</td>
         <td style="color:var(--secondary)">${p.score}</td>
       `;
       document.getElementById("mainTable").appendChild(row);
     });
 
-    // Gráfico de Dona (Solo MVPs)
+    // Gráfico de Dona
     new Chart(document.getElementById('mvpChart'), {
       type: 'doughnut',
       data: {
