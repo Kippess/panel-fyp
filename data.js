@@ -2,7 +2,7 @@
 const TOTAL_MATCHES = 5;
 
 // NUEVO: Acá pones la plata recaudada (cambia el 0 por el monto real)
-const FONDO_COMUN = 0; 
+const FONDO_COMUN = $18154; 
 
 const PLAYERS = {
   "Kippes": { matches: 5, mvp: 2, foto: "kippes.jpg" },
