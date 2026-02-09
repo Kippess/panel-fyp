@@ -1,36 +1,35 @@
-// Cantidad de domingos que se han jugado en total en la temporada
+// Cantidad de domingos jugados en total
 const TOTAL_MATCHES = 5;
 
-// NUEVO: Acá pones la plata recaudada (cambia el 0 por el monto real)
-const FONDO_COMUN = 18154; 
+// Plata recaudada
+const FONDO_COMUN = 20203; 
 
 const PLAYERS = {
-  "Kippes": { matches: 5, mvp: 2, foto: "kippes.jpg" },
-  "Turro": { matches: 2, mvp: 0, foto: "Turro.jpg" },
-  "Demencia": { matches: 0, mvp: 0, foto: "Demencia.jpg" },
-  "Topa": { matches: 4, mvp: 0, foto: "Topa.jpg" },
-  "Isleño": { matches: 1, mvp: 0, foto: "Isleno.jpg" },
-  "Faculo Airbag": { matches: 1, mvp: 0, foto: "Faculo.jpg" },
-  "Fran": { matches: 4, mvp: 1, foto: "Fran.jpg" },
-  "Ponchi": { matches: 0, mvp: 0, foto: "Ponchi.jpg" },
-  "Jony sucio": { matches: 0, mvp: 0, foto: "Jony.jpg" },
-  "Julio Metal": { matches: 3, mvp: 1, foto: "Julio.jpg" },
-  "Valencia": { matches: 0, mvp: 0, foto: "Valencia.jpg" },
-  "Dinho": { matches: 3, mvp: 0, foto: "Dinho.jpg" },
-  "Cinema": { matches: 2, mvp: 0, foto: "cinema.jpg" },
-  "Chinche": { matches: 5, mvp: 0, foto: "Chinche.jpg" },
-  "Culebra": { matches: 1, mvp: 0, foto: "Culebra.jpg" },
-  "Vegui": { matches: 2, mvp: 0, foto: "Vegui.jpg" },
-  "Mosky": { matches: 2, mvp: 0, foto: "Mosky.jpg" },
-  "Bylu": { matches: 2, mvp: 0, foto: "Bylu.jpg" },
-  "Pana Hija": { matches: 2, mvp: 0, foto: "Pana.jpg" }, 
-  "DJ Manzon": { matches: 4, mvp: 0, foto: "manzon.jpg" }, 
-  "Nuno": { matches: 4, mvp: 0, foto: "nuno.jpg" },
-  "Peter": { matches: 1, mvp: 1, foto: "peter.jpg" }
+  // BONUS: Es una compensación para no perder los puntos de los MVPs viejos (que bajaron de 70 a 50).
+  "Kippes": { matches: 5, mvp: 2, wins: 0, foto: "kippes.jpg", bonus: 40 },
+  "Turro": { matches: 2, mvp: 0, wins: 0, foto: "Turro.jpg", bonus: 0 },
+  "Demencia": { matches: 0, mvp: 0, wins: 0, foto: "Demencia.jpg", bonus: 0 },
+  "Topa": { matches: 4, mvp: 0, wins: 0, foto: "Topa.jpg", bonus: 0 },
+  "Isleño": { matches: 1, mvp: 0, wins: 0, foto: "Isleno.jpg", bonus: 0 },
+  "Faculo Airbag": { matches: 1, mvp: 0, wins: 0, foto: "Faculo.jpg", bonus: 0 },
+  "Fran": { matches: 4, mvp: 1, wins: 0, foto: "Fran.jpg", bonus: 20 },
+  "Ponchi": { matches: 0, mvp: 0, wins: 0, foto: "Ponchi.jpg", bonus: 0 },
+  "Jony sucio": { matches: 0, mvp: 0, wins: 0, foto: "Jony.jpg", bonus: 0 },
+  "Julio Metal": { matches: 3, mvp: 1, wins: 0, foto: "Julio.jpg", bonus: 20 },
+  "Valencia": { matches: 0, mvp: 0, wins: 0, foto: "Valencia.jpg", bonus: 0 },
+  "Dinho": { matches: 3, mvp: 0, wins: 0, foto: "Dinho.jpg", bonus: 0 },
+  "Cinema": { matches: 2, mvp: 0, wins: 0, foto: "cinema.jpg", bonus: 0 },
+  "Chinche": { matches: 5, mvp: 0, wins: 0, foto: "Chinche.jpg", bonus: 0 },
+  "Culebra": { matches: 1, mvp: 0, wins: 0, foto: "Culebra.jpg", bonus: 0 },
+  "Vegui": { matches: 2, mvp: 0, wins: 0, foto: "Vegui.jpg", bonus: 0 },
+  "Mosky": { matches: 2, mvp: 0, wins: 0, foto: "Mosky.jpg", bonus: 0 },
+  "Bylu": { matches: 2, mvp: 0, wins: 0, foto: "Bylu.jpg", bonus: 0 },
+  "Pana Hija": { matches: 2, mvp: 0, wins: 0, foto: "Pana.jpg", bonus: 0 }, 
+  "DJ Manzon": { matches: 4, mvp: 0, wins: 0, foto: "manzon.jpg", bonus: 0 }, 
+  "Nuno": { matches: 4, mvp: 0, wins: 0, foto: "nuno.jpg", bonus: 0 },
+  "Peter": { matches: 1, mvp: 1, wins: 0, foto: "peter.jpg", bonus: 20 }
 };
 
-// Aquí irás agregando los partidos. 
-// El último de la lista es el que activa el fuego 🔥 del MVP.
 const MATCH_HISTORY = [
   { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }, 
   { fecha: "12 Ene", resultado: "Pechera 8 - 12 Sin pechera", mvp: "Kippes" },
