@@ -1,39 +1,277 @@
-// Cantidad de domingos jugados en total
-const TOTAL_MATCHES = 5;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tabla Anual FYP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="logo.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>document.write('<script src="data.js?v=' + new Date().getTime() + '"><\/script>');</script>
 
-// Plata recaudada
-const FONDO_COMUN = 18203; 
+<style>
+  :root {
+    --primary: #009640; 
+    --secondary: #f39c12; 
+    --dark-bg: #1a1a1a;
+    --card-bg: rgba(255, 255, 255, 0.07);
+    --text-color: #ecf0f1;
+    --gold: #ffd700;
+    --silver: #c0c0c0;
+    --bronze: #cd7f32;
+  }
 
-const PLAYERS = {
-  // BONUS: Es una compensación para no perder los puntos de los MVPs viejos (que bajaron de 70 a 50).
-  "Kippes": { matches: 5, mvp: 2, wins: 0, foto: "kippes.jpg", bonus: 40 },
-  "Turro": { matches: 2, mvp: 0, wins: 0, foto: "Turro.jpg", bonus: 0 },
-  "Demencia": { matches: 0, mvp: 0, wins: 0, foto: "Demencia.jpg", bonus: 0 },
-  "Topa": { matches: 4, mvp: 0, wins: 0, foto: "Topa.jpg", bonus: 0 },
-  "Isleño": { matches: 1, mvp: 0, wins: 0, foto: "Isleno.jpg", bonus: 0 },
-  "Faculo Airbag": { matches: 1, mvp: 0, wins: 0, foto: "Faculo.jpg", bonus: 0 },
-  "Fran": { matches: 4, mvp: 1, wins: 0, foto: "Fran.jpg", bonus: 20 },
-  "Ponchi": { matches: 0, mvp: 0, wins: 0, foto: "Ponchi.jpg", bonus: 0 },
-  "Jony sucio": { matches: 0, mvp: 0, wins: 0, foto: "Jony.jpg", bonus: 0 },
-  "Julio Metal": { matches: 3, mvp: 1, wins: 0, foto: "Julio.jpg", bonus: 20 },
-  "Valencia": { matches: 0, mvp: 0, wins: 0, foto: "Valencia.jpg", bonus: 0 },
-  "Dinho": { matches: 3, mvp: 0, wins: 0, foto: "Dinho.jpg", bonus: 0 },
-  "Cinema": { matches: 2, mvp: 0, wins: 0, foto: "cinema.jpg", bonus: 0 },
-  "Chinche": { matches: 5, mvp: 0, wins: 0, foto: "Chinche.jpg", bonus: 0 },
-  "Culebra": { matches: 1, mvp: 0, wins: 0, foto: "Culebra.jpg", bonus: 0 },
-  "Vegui": { matches: 2, mvp: 0, wins: 0, foto: "Vegui.jpg", bonus: 0 },
-  "Mosky": { matches: 2, mvp: 0, wins: 0, foto: "Mosky.jpg", bonus: 0 },
-  "Bylu": { matches: 2, mvp: 0, wins: 0, foto: "Bylu.jpg", bonus: 0 },
-  "Pana Hija": { matches: 2, mvp: 0, wins: 0, foto: "Pana.jpg", bonus: 0 }, 
-  "DJ Manzon": { matches: 4, mvp: 0, wins: 0, foto: "manzon.jpg", bonus: 0 }, 
-  "Nuno": { matches: 4, mvp: 0, wins: 0, foto: "nuno.jpg", bonus: 0 },
-  "Peter": { matches: 1, mvp: 1, wins: 0, foto: "peter.jpg", bonus: 20 }
-};
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: radial-gradient(circle at center, #2c3e50, #000000);
+    color: var(--text-color);
+    margin: 0; padding: 20px;
+    min-height: 100vh;
+  }
 
-const MATCH_HISTORY = [
-  { fecha: "05 Ene", resultado: "Pechera 3 - 0 Sin pechera", mvp: "Fran" }, 
-  { fecha: "12 Ene", resultado: "Pechera 8 - 12 Sin pechera", mvp: "Kippes" },
-  { fecha: "18 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Kippes" },
-  { fecha: "25 Ene", resultado: "Pechera 8 - 9 Sin pechera", mvp: "Peter" },
-  { fecha: "25 Ene", resultado: "Pechera 14 - 11 Sin pechera", mvp: "Julio Metal" }
-];
+  header { text-align: center; margin-bottom: 30px; animation: fadeIn 1s ease; }
+  .logo-img { width: 120px; height: auto; border-radius: 50%; border: 3px solid var(--secondary); box-shadow: 0 0 20px rgba(243, 156, 18, 0.4); margin-bottom: 10px; }
+  h1 { text-transform: uppercase; font-weight: 900; font-size: 2.2em; margin: 10px 0; background: linear-gradient(to right, var(--secondary), #f1c40f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
+
+  .countdown-box { background: rgba(0, 150, 64, 0.2); border: 1px solid var(--primary); padding: 10px; border-radius: 10px; text-align: center; margin-bottom: 30px; font-weight: bold; color: #2ecc71; }
+
+  .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px; }
+  .card { background: var(--card-bg); padding: 20px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s; }
+  .card:hover { transform: translateY(-5px); }
+  
+  .money-card { border: 2px solid #27ae60; background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(0,0,0,0.8)); text-align: center; }
+  .money-amount { font-size: 2.5em; font-weight: 900; color: #2ecc71; text-shadow: 0 0 15px rgba(46, 204, 113, 0.4); margin: 10px 0; }
+
+  .champion-card { background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(0,0,0,0.8)); border: 2px solid var(--secondary); text-align: center; position: relative; overflow: hidden; }
+  .champion-card::before { content: "👑 VIGENTE CAMPEÓN"; position: absolute; top: 10px; right: -30px; background: var(--secondary); color: black; padding: 5px 30px; transform: rotate(45deg); font-weight: bold; font-size: 0.8em; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+  .champion-img { width: 100%; max-height: 250px; object-fit: cover; object-position: top; border-radius: 15px; border: 2px solid rgba(255,215,0,0.3); margin-bottom: 10px; }
+
+  .btn-vote { display: block; width: 100%; text-align: center; background: linear-gradient(45deg, var(--primary), #27ae60); color: white; padding: 15px 0; border-radius: 10px; text-decoration: none; font-weight: bold; text-transform: uppercase; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3); }
+  .btn-vote:hover { filter: brightness(1.2); transform: scale(1.02); transition: 0.2s; }
+
+  .top-list .player-row { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .points { color: var(--secondary); font-weight: bold; }
+
+  .prizes-list { list-style: none; padding: 0; margin: 0; }
+  .prize-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 5px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .prize-item:last-child { border-bottom: none; }
+  .place-badge { font-weight: 900; font-size: 1.2em; width: 30px; }
+  .prize-desc { text-align: right; font-weight: bold; font-size: 0.95em; color: #fff; }
+  .txt-gold { color: var(--gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+  .txt-silver { color: var(--silver); text-shadow: 0 0 10px rgba(192, 192, 192, 0.4); }
+  .txt-bronze { color: var(--bronze); }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  th { background: rgba(0, 150, 64, 0.3); padding: 12px; font-size: 0.75em; }
+  td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; }
+  tr { cursor: pointer; }
+  tr:hover { background: rgba(255,255,255,0.05); }
+  
+  .history-scroll { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
+  .match-mini { min-width: 180px; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; border-left: 3px solid var(--secondary); }
+
+  /* ESTILOS MODAL */
+  .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
+  .player-card { background: linear-gradient(135deg, #f39c12 0%, #d35400 100%); width: 280px; padding: 25px; border-radius: 20px; text-align: center; color: #1a1a1a; box-shadow: 0 0 30px rgba(243, 156, 18, 0.6); position: relative; }
+  .photo-frame { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 15px; border: 4px solid #1a1a1a; overflow: hidden; background: #eee; }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+  .close-modal { position: absolute; top: 10px; right: 15px; font-size: 25px; cursor: pointer; }
+  .streak-fire { filter: drop-shadow(0 0 5px orange); animation: flicker 1s infinite alternate; }
+  @keyframes flicker { from { opacity: 0.7; } to { opacity: 1; } }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="logo.jpg" alt="Escudo FYP" class="logo-img">
+  <h1>Tabla Anual FYP</h1>
+</header>
+
+<div class="countdown-box" id="countdown">⚽ Próximo Partido: Calculando...</div>
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfG1KnEwmMxVccHRgfdSz_bl562XvWSiZbHR3FK8IInFbL-tA/viewform" target="_blank" class="btn-vote">🗳️ VOTAR MVP AHORA</a>
+
+<div class="grid-container">
+  
+  <div class="card money-card">
+    <h3>💰 FONDO COMÚN</h3>
+    <div class="money-amount" id="moneyDisplay">$0</div>
+    <p style="font-size:0.8em; opacity:0.8">Recaudado para Premios/Asado</p>
+  </div>
+
+  <div class="card champion-card">
+    <h3>🏆 CAMPEÓN 2025</h3>
+    <img src="campeon.jpg" alt="Campeón Vigente" class="champion-img">
+    <h2 style="margin:5px 0; color:var(--secondary)">LA DEMENCIA</h2>
+    <p style="font-size:0.9em; opacity:0.8">Defenderá el título esta temporada.</p>
+  </div>
+
+  <div class="card">
+    <h3>📊 Rendimiento Actual</h3>
+    <p style="text-align: center; font-weight: bold; margin-bottom: 10px;">Partidos Jugados: <span id="matchesCount" style="color:var(--secondary)">0</span></p>
+    <div style="position: relative; height:200px">
+        <canvas id="mvpChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔥 TOP 5 (2026)</h3>
+    <div id="top5List" class="top-list"></div>
+  </div>
+
+  <div class="card">
+    <h3>🎁 PREMIOS TEMPORADA</h3>
+    <ul class="prizes-list">
+      <li class="prize-item"><span class="place-badge txt-gold">1°</span><span class="prize-desc">💰 $100.000</span></li>
+      <li class="prize-item"><span class="place-badge txt-silver">2°</span><span class="prize-desc">💰 $50.000</span></li>
+      <li class="prize-item"><span class="place-badge txt-bronze">3°</span><span class="prize-desc">👕 Remera Nuevos Trapos</span></li>
+      <li class="prize-item"><span class="place-badge">4°</span><span class="prize-desc">👕 Remera Nuevos Trapos</span></li>
+      <li class="prize-item"><span class="place-badge">5°</span><span class="prize-desc">👕 Remera Nuevos Trapos</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom: 20px;">
+  <h3>📅 Historial de Partidos</h3>
+  <div id="historyContainer" class="history-scroll"></div>
+</div>
+
+<div class="card">
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Jugador</th><th>PJ</th><th>%</th><th>PG</th><th>MVP</th><th>Pts</th></tr>
+      </thead>
+      <tbody id="mainTable"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="playerModal" class="modal">
+  <div class="player-card">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <div class="photo-frame"><img id="modalFoto" src="" alt="Foto"></div>
+    <h2 id="modalName" style="margin:10px 0; text-transform:uppercase"></h2>
+    
+    <div style="background:rgba(255,255,255,0.2); padding:10px; border-radius:10px; display:grid; grid-template-columns: 1fr 1fr; gap:5px;">
+      <div>PJ: <span id="modalPJ" style="font-weight:900"></span></div>
+      <div>PG: <span id="modalPG" style="font-weight:900; color:#2ecc71"></span></div>
+      <div>MVP: <span id="modalMVP" style="font-weight:900"></span></div>
+      <div>Pts: <span id="modalPTS" style="font-weight:900; color:var(--secondary)"></span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateCountdown() {
+    const now = new Date();
+    const nextSunday = new Date();
+    nextSunday.setDate(now.getDate() + (7 - now.getDay()) % 7);
+    nextSunday.setHours(20, 0, 0, 0); 
+    if (now > nextSunday) nextSunday.setDate(nextSunday.getDate() + 7);
+    const diff = nextSunday - now;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById("countdown").innerText = days > 0 ? `Faltan ${days} días y ${hours} horas para el Domingo` : `¡HOY SE JUEGA! ⚽ Faltan ${hours} horas`;
+  }
+  updateCountdown();
+
+  if(typeof PLAYERS !== 'undefined') {
+    document.getElementById("matchesCount").innerText = TOTAL_MATCHES;
+
+    if(typeof FONDO_COMUN !== 'undefined') {
+        document.getElementById("moneyDisplay").innerText = "$" + FONDO_COMUN.toLocaleString('es-AR');
+    }
+
+    const data = Object.entries(PLAYERS).map(([name, d]) => {
+      // --- NUEVA FORMULA ---
+      // 30 PJ + 20 WIN + 50 MVP + BONUS HISTÓRICO
+      const score = (d.matches * 30) + (d.wins * 20) + (d.mvp * 50) + (d.bonus || 0);
+      return { name, ...d, score };
+    }).sort((a, b) => b.score - a.score);
+
+    // Llenar Top 5
+    data.slice(0, 5).forEach((p, i) => {
+      const medals = ["🥇", "🥈", "🥉", "4°", "5°"];
+      document.getElementById("top5List").innerHTML += `
+        <div class="player-row">
+          <span>${medals[i]} ${p.name}</span>
+          <span class="points">${p.score}</span>
+        </div>`;
+    });
+
+    if(typeof MATCH_HISTORY !== 'undefined'){
+      MATCH_HISTORY.forEach(m => {
+        document.getElementById("historyContainer").innerHTML += `
+          <div class="match-mini">
+            <div style="color:var(--secondary); font-weight:bold; font-size:0.8em">${m.fecha}</div>
+            <div>${m.resultado}</div>
+            <div style="margin-top:5px; font-size:0.9em">🌟 MVP: ${m.mvp}</div>
+          </div>`;
+      });
+    }
+
+    const lastMVP = (typeof MATCH_HISTORY !== 'undefined' && MATCH_HISTORY.length > 0) ? MATCH_HISTORY[MATCH_HISTORY.length - 1].mvp : "";
+
+    data.forEach((p, i) => {
+      const hasStreak = p.name === lastMVP ? '<span class="streak-fire">🔥</span>' : '';
+      
+      let percent = 0;
+      if (TOTAL_MATCHES > 0) {
+        percent = Math.round((p.matches / TOTAL_MATCHES) * 100);
+      }
+
+      let percentColor = "#e74c3c";
+      if(percent >= 50) percentColor = "#f39c12"; 
+      if(percent >= 80) percentColor = "#2ecc71";
+
+      const row = document.createElement("tr");
+      row.onclick = () => openModal(p);
+      row.innerHTML = `
+        <td>${i+1}</td>
+        <td style="text-align:left; font-weight:bold">${p.name} ${hasStreak}</td>
+        <td>${p.matches}</td>
+        <td style="color:${percentColor}; font-weight:bold; font-size:0.9em">${percent}%</td>
+        <td style="color:#2ecc71; font-weight:bold">${p.wins}</td>
+        <td>${p.mvp}</td>
+        <td style="color:var(--secondary)">${p.score}</td>
+      `;
+      document.getElementById("mainTable").appendChild(row);
+    });
+
+    new Chart(document.getElementById('mvpChart'), {
+      type: 'doughnut',
+      data: {
+        labels: data.filter(p => p.mvp > 0).map(p => p.name),
+        datasets: [{
+          data: data.filter(p => p.mvp > 0).map(p => p.mvp),
+          backgroundColor: ['#009640', '#f39c12', '#e74c3c', '#3498db', '#9b59b6', '#ecf0f1'],
+          borderWidth: 0
+        }]
+      },
+      options: { 
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { 
+            legend: { position: 'right', labels: { color: 'white', boxWidth: 10 } } 
+        } 
+      }
+    });
+  }
+
+  function openModal(p) {
+    document.getElementById("modalName").innerText = p.name;
+    document.getElementById("modalPJ").innerText = p.matches;
+    document.getElementById("modalPG").innerText = p.wins; // Nuevo
+    document.getElementById("modalMVP").innerText = p.mvp;
+    document.getElementById("modalPTS").innerText = p.score;
+    document.getElementById("modalFoto").src = p.foto || 'default.jpg';
+    document.getElementById("playerModal").style.display = "flex";
+  }
+  function closeModal() { document.getElementById("playerModal").style.display = "none"; }
+  window.onclick = function(event) { if (event.target == document.getElementById("playerModal")) closeModal(); }
+</script>
+</body>
+</html>
