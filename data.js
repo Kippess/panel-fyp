@@ -36,6 +36,6 @@ const MATCH_HISTORY = [
   { fecha: "18 Ene", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Kippes" },
   { fecha: "25 Ene", resultado: "Pechera 8 - 9 Sin pechera", mvp: "Peter" },
   { fecha: "05 Feb", resultado: "Pechera 14 - 11 Sin pechera", mvp: "Julio Metal" },
-  { fecha: "10 Feb", resultado: "Pechera 14 - 7 Sin pechera", mvp: "???" },
+  { fecha: "10 Feb", resultado: "Pechera 14 - 7 Sin pechera", mvp: "Chinche" },
   
 ];
