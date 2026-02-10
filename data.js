@@ -27,7 +27,7 @@ const PLAYERS = {
   "Pana Hija": { matches: 2, mvp: 0, wins: 0, foto: "Pana.jpg", bonus: 0 }, 
   "DJ Manzon": { matches: 4, mvp: 0, wins: 0, foto: "manzon.jpg", bonus: 0 }, 
   "Nuno": { matches: 5, mvp: 0, wins: 0, foto: "nuno.jpg", bonus: 0 },
-  "Peter": { matches: 1, mvp: 1, wins: 0, foto: "peter.jpg", bonus: 20 }
+  "Peter": { matches: 1, mvp: 1, wins: 0, foto: "peter.jpg", bonus: 20 },
 };
 
 const MATCH_HISTORY = [
