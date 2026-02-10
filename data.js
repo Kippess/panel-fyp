@@ -19,7 +19,7 @@ const PLAYERS = {
   "Valencia": { matches: 0, mvp: 0, wins: 0, foto: "Valencia.jpg", bonus: 0 },
   "Dinho": { matches: 3, mvp: 0, wins: 0, foto: "Dinho.jpg", bonus: 0 },
   "Cinema": { matches: 2, mvp: 0, wins: 0, foto: "cinema.jpg", bonus: 0 },
-  "Chinche": { matches: 6, mvp: 0, wins: 1, foto: "Chinche.jpg", bonus: 0 },
+  "Chinche": { matches: 6, mvp: 1, wins: 1, foto: "Chinche.jpg", bonus: 0 },
   "Culebra": { matches: 2, mvp: 0, wins: 0, foto: "Culebra.jpg", bonus: 0 },
   "Vegui": { matches: 3, mvp: 0, wins: 0, foto: "Vegui.jpg", bonus: 0 },
   "Mosky": { matches: 3, mvp: 0, wins: 0, foto: "Mosky.jpg", bonus: 0 },
