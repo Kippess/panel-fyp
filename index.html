@@ -62,7 +62,7 @@
   .txt-bronze { color: var(--bronze); }
 
   table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-  th { background: rgba(0, 150, 64, 0.3); padding: 12px; font-size: 0.75em; }
+  th { background: rgba(0, 150, 64, 0.3); padding: 12px; font-size: 0.7em; }
   td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; }
   tr { cursor: pointer; }
   tr:hover { background: rgba(255,255,255,0.05); }
@@ -91,7 +91,7 @@
 
 <div class="countdown-box" id="countdown">⚽ Próximo Partido: Calculando...</div>
 
-<a href="https://forms.gle/3doAVHqDWW4xbz2aA" target="_blank" class="btn-vote">🗳️ VOTAR MVP AHORA</a>
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfG1KnEwmMxVccHRgfdSz_bl562XvWSiZbHR3FK8IInFbL-tA/viewform" target="_blank" class="btn-vote">🗳️ VOTAR MVP AHORA</a>
 
 <div class="grid-container">
   
@@ -142,7 +142,7 @@
   <div style="overflow-x:auto;">
     <table>
       <thead>
-        <tr><th>#</th><th>Jugador</th><th>PJ</th><th>%</th><th>PG</th><th>MVP</th><th>Pts</th></tr>
+        <tr><th>#</th><th>Jugador</th><th>PJ</th><th>%</th><th>PG</th><th>G.F.</th><th>MVP</th><th>Pts</th></tr>
       </thead>
       <tbody id="mainTable"></tbody>
     </table>
@@ -155,11 +155,14 @@
     <div class="photo-frame"><img id="modalFoto" src="" alt="Foto"></div>
     <h2 id="modalName" style="margin:10px 0; text-transform:uppercase"></h2>
     
-    <div style="background:rgba(255,255,255,0.2); padding:10px; border-radius:10px; display:grid; grid-template-columns: 1fr 1fr; gap:5px;">
-      <div>PJ: <span id="modalPJ" style="font-weight:900"></span></div>
-      <div>PG: <span id="modalPG" style="font-weight:900; color:#2ecc71"></span></div>
-      <div>MVP: <span id="modalMVP" style="font-weight:900"></span></div>
-      <div>Pts: <span id="modalPTS" style="font-weight:900; color:var(--secondary)"></span></div>
+    <div style="background:rgba(255,255,255,0.2); padding:10px; border-radius:10px; display:grid; grid-template-columns: 1fr 1fr; gap:5px; text-align: left;">
+      <div>PJ: <span id="modalPJ" style="font-weight:900; float:right"></span></div>
+      <div>PG: <span id="modalPG" style="font-weight:900; float:right; color:#2ecc71"></span></div>
+      <div>MVP: <span id="modalMVP" style="font-weight:900; float:right; color:#f1c40f"></span></div>
+      <div>G.Fecha: <span id="modalGF" style="font-weight:900; float:right; color:#e67e22"></span></div>
+      <div style="grid-column: span 2; text-align:center; border-top:1px solid rgba(0,0,0,0.1); margin-top:5px; padding-top:5px;">
+        TOTAL: <span id="modalPTS" style="font-weight:900; font-size:1.2em; color:#1a1a1a"></span>
+      </div>
     </div>
   </div>
 </div>
@@ -187,8 +190,8 @@
 
     const data = Object.entries(PLAYERS).map(([name, d]) => {
       // --- NUEVA FORMULA ---
-      // 30 PJ + 20 WIN + 50 MVP + BONUS HISTÓRICO
-      const score = (d.matches * 30) + (d.wins * 20) + (d.mvp * 50) + (d.bonus || 0);
+      // 30 PJ + 20 WIN + 50 MVP + 20 GOLFECHA + BONUS HISTÓRICO
+      const score = (d.matches * 30) + (d.wins * 20) + (d.mvp * 50) + (d.goalFech * 20) + (d.bonus || 0);
       return { name, ...d, score };
     }).sort((a, b) => b.score - a.score);
 
@@ -235,6 +238,7 @@
         <td>${p.matches}</td>
         <td style="color:${percentColor}; font-weight:bold; font-size:0.9em">${percent}%</td>
         <td style="color:#2ecc71; font-weight:bold">${p.wins}</td>
+        <td style="color:#e67e22; font-weight:bold">${p.goalFech}</td>
         <td>${p.mvp}</td>
         <td style="color:var(--secondary)">${p.score}</td>
       `;
@@ -264,7 +268,8 @@
   function openModal(p) {
     document.getElementById("modalName").innerText = p.name;
     document.getElementById("modalPJ").innerText = p.matches;
-    document.getElementById("modalPG").innerText = p.wins; // Nuevo
+    document.getElementById("modalPG").innerText = p.wins;
+    document.getElementById("modalGF").innerText = p.goalFech; // Nuevo
     document.getElementById("modalMVP").innerText = p.mvp;
     document.getElementById("modalPTS").innerText = p.score;
     document.getElementById("modalFoto").src = p.foto || 'default.jpg';
