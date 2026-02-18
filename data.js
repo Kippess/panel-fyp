@@ -1,8 +1,8 @@
 // Cantidad de domingos jugados en total
-const TOTAL_MATCHES = 6;
+const TOTAL_MATCHES = 7;
 
 // Plata recaudada
-const FONDO_COMUN = 30346; 
+const FONDO_COMUN = 48350; 
 
 const PLAYERS = {
   // Se agregó "goalFech" a todos para que el sistema de puntos funcione correctamente.
