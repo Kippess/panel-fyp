@@ -20,7 +20,7 @@ const PLAYERS = {
   "Dinho": { matches: 3, mvp: 0, wins: 0, goalFech: 0, foto: "Dinho.jpg", bonus: 0 },
   "Cinema": { matches: 3, mvp: 0, wins: 0, goalFech: 0, foto: "cinema.jpg", bonus: 0 },
   "Chinche": { matches: 6, mvp: 1, wins: 1, goalFech: 0, foto: "Chinche.jpg", bonus: 0 },
-  "Culebra": { matches: 3, mvp: 0, wins: 1, goalFech: 0, foto: "Culebra.jpg", bonus: 0 },
+  "Culebra": { matches: 3, mvp: 1, wins: 1, goalFech: 1, foto: "Culebra.jpg", bonus: 0 },
   "Vegui": { matches: 4, mvp: 0, wins: 0, goalFech: 0, foto: "Vegui.jpg", bonus: 0 },
   "Mosky": { matches: 4, mvp: 0, wins: 0, goalFech: 0, foto: "Mosky.jpg", bonus: 0 },
   "Bylu": { matches: 3, mvp: 0, wins: 0, goalFech: 0, foto: "Bylu.jpg", bonus: 0 },
@@ -37,5 +37,5 @@ const MATCH_HISTORY = [
   { fecha: "25 Ene", resultado: "Pechera 8 - 9 Sin pechera", mvp: "Peter" },
   { fecha: "05 Feb", resultado: "Pechera 14 - 11 Sin pechera", mvp: "Julio Metal" },
   { fecha: "10 Feb", resultado: "Pechera 14 - 7 Sin pechera", mvp: "Chinche" },
-  { fecha: "17 Feb", resultado: "Pechera 5 - 7 Sin pechera", mvp: "???" },
+  { fecha: "17 Feb", resultado: "Pechera 5 - 7 Sin pechera", mvp: "Culebra" },
 ];
