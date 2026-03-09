@@ -19,15 +19,15 @@ const PLAYERS = {
   "Valencia": { matches: 1, mvp: 0, wins: 0, goalFech: 0, foto: "Valencia.jpg", bonus: 0 },
   "Dinho": { matches: 4, mvp: 0, wins: 1, goalFech: 0, foto: "Dinho.jpg", bonus: 0 },
   "Cinema": { matches: 3, mvp: 0, wins: 0, goalFech: 0, foto: "cinema.jpg", bonus: 0 },
-  "Chinche": { matches: 8, mvp: 1, wins: 2, goalFech: 1, foto: "Chinche.jpg", bonus: 0 },
+  "Chinche": { matches: 8, mvp: 1, wins: 3, goalFech: 1, foto: "Chinche.jpg", bonus: 0 },
   "Culebra": { matches: 3, mvp: 1, wins: 1, goalFech: 1, foto: "Culebra.jpg", bonus: 0 },
   "Vegui": { matches: 6, mvp: 0, wins: 1, goalFech: 0, foto: "Vegui.jpg", bonus: 0 },
   "Mosky": { matches: 4, mvp: 0, wins: 0, goalFech: 0, foto: "Mosky.jpg", bonus: 0 },
   "Bylu": { matches: 5, mvp: 1, wins: 2, goalFech: 0, foto: "Bylu.jpg", bonus: 0 },
   "Pana Hija": { matches: 2, mvp: 0, wins: 0, goalFech: 0, foto: "Pana.jpg", bonus: 0 }, 
   "DJ Manzon": { matches: 6, mvp: 0, wins: 1, goalFech: 0, foto: "manzon.jpg", bonus: 0 }, 
-  "Nuno": { matches: 8, mvp: 0, wins: 3, goalFech: 0, foto: "nuno.jpg", bonus: 0 },
-  "Peter": { matches: 4, mvp: 1, wins: 1, goalFech: 0, foto: "peter.jpg", bonus: 20 },
+  "Nuno": { matches: 8, mvp: 0, wins: 1, goalFech: 0, foto: "nuno.jpg", bonus: 0 },
+  "Peter": { matches: 4, mvp: 1, wins: 2, goalFech: 0, foto: "peter.jpg", bonus: 20 },
 };
 
 const MATCH_HISTORY = [
