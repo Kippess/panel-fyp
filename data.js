@@ -2,7 +2,7 @@
 const TOTAL_MATCHES = 9;
 
 // Plata recaudada
-const FONDO_COMUN = 64072; 
+const FONDO_COMUN = 72628; 
 
 const PLAYERS = {
   // Se agregó "goalFech" a todos para que el sistema de puntos funcione correctamente.
