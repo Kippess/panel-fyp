@@ -11,7 +11,7 @@ const PLAYERS = {
   "Demencia": { matches: 2, mvp: 0, wins: 0, goalFech: 0, foto: "Demencia.jpg", bonus: 0 },
   "Topa": { matches: 9, mvp: 0, wins: 3, goalFech: 0, foto: "Topa.jpg", bonus: 0 },
   "Isleño": { matches: 1, mvp: 0, wins: 0, goalFech: 0, foto: "Isleno.jpg", bonus: 0 },
-  "Faculo Airbag": { matches: 4, mvp: 0, wins: 2, goalFech: 0, foto: "Faculo.jpg", bonus: 0 },
+  "Faculo Airbag": { matches: 4, mvp: 1, wins: 2, goalFech: 1, foto: "Faculo.jpg", bonus: 0 },
   "Fran": { matches: 10, mvp: 1, wins: 3, goalFech: 0, foto: "Fran.jpg", bonus: 20 },
   "Ponchi": { matches: 0, mvp: 0, wins: 0, goalFech: 0, foto: "Ponchi.jpg", bonus: 0 },
   "Jony sucio": { matches: 2, mvp: 0, wins: 1, goalFech: 0, foto: "Jony.jpg", bonus: 0 },
