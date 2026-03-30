@@ -1,8 +1,8 @@
 // Cantidad de domingos jugados en total
-const TOTAL_MATCHES = 11;
+const TOTAL_MATCHES = 12;
 
 // Plata recaudada
-const FONDO_COMUN = 27718; 
+const FONDO_COMUN = 43000; 
 
 const PLAYERS = {
   // Se agregó "goalFech" a todos para que el sistema de puntos funcione correctamente.
@@ -29,6 +29,7 @@ const PLAYERS = {
   "Nuno": { matches: 11, mvp: 0, wins: 3, goalFech: 0, foto: "nuno.jpg", bonus: 0 },
   "Peter": { matches: 7, mvp: 1, wins: 3, goalFech: 0, foto: "peter.jpg", bonus: 20 },
   "Tincho": { matches: 5, mvp: 0, wins: 0, goalFech: 0, foto: "ticnho.jpg", bonus: 0 },
+  "Nacho Suri IND": { matches: 2, mvp: 0, wins: 0, goalFech: 0, foto: "Nacho.jpg", bonus: 0 },
 };
 
 const MATCH_HISTORY = [
@@ -43,4 +44,5 @@ const MATCH_HISTORY = [
   { fecha: "08 Feb", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Vegui" },
   { fecha: "15 Marzo", resultado: "Pechera 12 - 7 Sin pechera", mvp: "Faculo Airbag" },
   { fecha: "22 Marzo", resultado: "Pechera 2 - 6 Sin pechera", mvp: "Fran" },
+  { fecha: "29 Marzo", resultado: "Pechera 4 - 10 Sin pechera", mvp: "???" },
 ];
