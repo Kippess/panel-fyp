@@ -19,9 +19,9 @@ const PLAYERS = {
   "Valencia": { matches: 3, mvp: 0, wins: 1, goalFech: 0, foto: "Valencia.jpg", bonus: 0 },
   "Bini": { matches: 6, mvp: 0, wins: 2, goalFech: 0, foto: "Bini.jpg", bonus: 0 },
   "Cinema": { matches: 4, mvp: 0, wins: 0, goalFech: 0, foto: "cinema.jpg", bonus: 0 },
-  "Chinche": { matches: 12, mvp: 1, wins: 5, goalFech: 1, foto: "Chinche.jpg", bonus: 0 },
+  "Chinche": { matches: 12, mvp: 2, wins: 5, goalFech: 1, foto: "Chinche.jpg", bonus: 0 },
   "Culebra": { matches: 4, mvp: 1, wins: 1, goalFech: 1, foto: "Culebra.jpg", bonus: 0 },
-  "Vegui": { matches: 10, mvp: 1, wins: 2, goalFech: 1, foto: "Vegui.jpg", bonus: 0 },
+  "Vegui": { matches: 10, mvp: 1, wins: 2, goalFech: 2, foto: "Vegui.jpg", bonus: 0 },
   "Mosky": { matches: 6, mvp: 0, wins: 2, goalFech: 0, foto: "Mosky.jpg", bonus: 0 },
   "Bylu": { matches: 8, mvp: 1, wins: 2, goalFech: 0, foto: "Bylu.jpg", bonus: 0 },
   "Pana Hija": { matches: 3, mvp: 0, wins: 0, goalFech: 0, foto: "Pana.jpg", bonus: 0 }, 
@@ -44,5 +44,5 @@ const MATCH_HISTORY = [
   { fecha: "08 Feb", resultado: "Pechera 7 - 4 Sin pechera", mvp: "Vegui" },
   { fecha: "15 Marzo", resultado: "Pechera 12 - 7 Sin pechera", mvp: "Faculo Airbag" },
   { fecha: "22 Marzo", resultado: "Pechera 2 - 6 Sin pechera", mvp: "Fran" },
-  { fecha: "29 Marzo", resultado: "Pechera 4 - 10 Sin pechera", mvp: "???" },
+  { fecha: "29 Marzo", resultado: "Pechera 4 - 10 Sin pechera", mvp: "Chinche" },
 ];
