@@ -21,17 +21,15 @@
     --bronze: #cd7f32;
   }
 
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background: radial-gradient(circle at center, #2c3e50, #000000);
-    color: var(--text-color);
-    margin: 0; padding: 20px;
-    min-height: 100vh;
-  }
-
-  header { text-align: center; margin-bottom: 30px; animation: fadeIn 1s ease; }
+  body { font-family: 'Montserrat', sans-serif; background: radial-gradient(circle at center, #2c3e50, #000000); color: var(--text-color); margin: 0; padding: 20px; min-height: 100vh; }
+  
+  header { text-align: center; margin-bottom: 30px; animation: fadeIn 1s ease; position: relative; }
   .logo-img { width: 120px; height: auto; border-radius: 50%; border: 3px solid var(--secondary); box-shadow: 0 0 20px rgba(243, 156, 18, 0.4); margin-bottom: 10px; }
   h1 { text-transform: uppercase; font-weight: 900; font-size: 2.2em; margin: 10px 0; background: linear-gradient(to right, var(--secondary), #f1c40f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
+
+  /* BOTÓN OCULTO ADMIN */
+  .admin-trigger { position: absolute; top: 0; right: 0; background: none; border: none; color: white; opacity: 0.1; cursor: pointer; font-size: 1.5em; z-index: 100; }
+  .admin-trigger:hover { opacity: 1; color: var(--secondary); }
 
   .countdown-box { background: rgba(0, 150, 64, 0.2); border: 1px solid var(--primary); padding: 10px; border-radius: 10px; text-align: center; margin-bottom: 30px; font-weight: bold; color: #2ecc71; }
 
@@ -70,7 +68,21 @@
   .history-scroll { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
   .match-mini { min-width: 180px; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; border-left: 3px solid var(--secondary); }
 
-  /* ESTILOS MODAL */
+  /* PANEL ADMIN (OCULTO) */
+  #adminPanel { display:none; background: #222; color: white; padding: 20px; border-radius: 15px; border: 2px solid var(--secondary); max-width: 500px; margin: 20px auto; position: fixed; top: 5%; left: 50%; transform: translateX(-50%); z-index: 2000; max-height: 90vh; overflow-y: auto; box-shadow: 0 0 30px rgba(0,0,0,0.8); width: 90%; }
+  .admin-form-group { margin-bottom: 15px; }
+  label { display: block; font-size: 0.8em; margin-bottom: 5px; color: var(--secondary); }
+  select, input[type="text"], input[type="number"] { width: 100%; padding: 8px; border-radius: 5px; border: none; background: #333; color: white; box-sizing: border-box;}
+  
+  /* ESTILOS CHECKBOXES GRID */
+  .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-height: 150px; overflow-y: auto; background: #333; padding: 10px; border-radius: 5px; }
+  .checkbox-grid label { display: flex; align-items: center; gap: 8px; cursor: pointer; color: white; margin-bottom: 0; font-size: 0.9em; }
+  .checkbox-grid input[type="checkbox"] { width: 18px; height: 18px; margin: 0; cursor: pointer; accent-color: var(--primary); }
+
+  .btn-save { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px; border-radius: 5px; font-size: 1.1em;}
+  #outputJson { width: 100%; height: 120px; margin-top: 10px; font-size: 10px; background: #000; color: #0f0; display: none; border: 1px solid #0f0; box-sizing: border-box; }
+
+  /* ESTILOS MODAL JUGADOR */
   .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
   .player-card { background: linear-gradient(135deg, #f39c12 0%, #d35400 100%); width: 280px; padding: 25px; border-radius: 20px; text-align: center; color: #1a1a1a; box-shadow: 0 0 30px rgba(243, 156, 18, 0.6); position: relative; }
   .photo-frame { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 15px; border: 4px solid #1a1a1a; overflow: hidden; background: #eee; }
@@ -78,23 +90,78 @@
   .close-modal { position: absolute; top: 10px; right: 15px; font-size: 25px; cursor: pointer; }
   .streak-fire { filter: drop-shadow(0 0 5px orange); animation: flicker 1s infinite alternate; }
   @keyframes flicker { from { opacity: 0.7; } to { opacity: 1; } }
-
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 </style>
 </head>
 <body>
 
 <header>
+  <button class="admin-trigger" onclick="openAdmin()">⚙️</button>
   <img src="logo.jpg" alt="Escudo FYP" class="logo-img">
   <h1>Tabla Anual FYP</h1>
 </header>
 
+<div id="adminPanel">
+  <h3 style="margin-top:0; color:var(--secondary); text-align: center;">🛠️ PANEL DE CONTROL</h3>
+  
+  <div style="display:flex; gap:10px;">
+    <div class="admin-form-group" style="flex:1;">
+      <label>PJ Total:</label>
+      <input type="number" id="admTotalMatches">
+    </div>
+    <div class="admin-form-group" style="flex:1;">
+      <label>Fondo ($):</label>
+      <input type="number" id="admFondo">
+    </div>
+  </div>
+
+  <hr style="border-color: #444;">
+  <p style="font-size: 0.8em; font-weight:bold; color:var(--primary)">NUEVO PARTIDO (Historial):</p>
+  <div style="display:flex; gap:10px;">
+    <div class="admin-form-group" style="flex:1;">
+      <label>Fecha (Ej: 05 Abr):</label>
+      <input type="text" id="admFechaPartido" placeholder="dd Mes">
+    </div>
+    <div class="admin-form-group" style="flex:2;">
+      <label>Resultado:</label>
+      <input type="text" id="admResultadoPartido" placeholder="Pechera X - X Sin">
+    </div>
+  </div>
+
+  <hr style="border-color: #444;">
+  <p style="font-size: 0.8em; font-weight:bold; color:var(--primary)">JUGADORES:</p>
+  
+  <div class="admin-form-group">
+    <label>☑️ Asistieron (Tildá los que fueron):</label>
+    <div id="admAsistencia" class="checkbox-grid"></div>
+  </div>
+  
+  <div class="admin-form-group">
+    <label>🏆 Ganaron (Tildá los del equipo ganador):</label>
+    <div id="admGanadores" class="checkbox-grid"></div>
+  </div>
+  
+  <div style="display:flex; gap:10px;">
+    <div class="admin-form-group" style="flex:1;">
+      <label>🌟 MVP:</label>
+      <select id="admMvp"></select>
+    </div>
+    <div class="admin-form-group" style="flex:1;">
+      <label>🚀 Gol Fecha:</label>
+      <select id="admGol"></select>
+    </div>
+  </div>
+  
+  <button class="btn-save" onclick="processData()">GENERAR CÓDIGO DATA.JS</button>
+  <textarea id="outputJson" readonly></textarea>
+  <button onclick="document.getElementById('adminPanel').style.display='none'" style="margin-top:10px; background:red; color:white; border:none; padding:12px; width:100%; border-radius:5px; cursor:pointer; font-weight:bold;">Cerrar Panel</button>
+</div>
+
 <div class="countdown-box" id="countdown">⚽ Próximo Partido: Calculando...</div>
 
-<a href="https://forms.gle/nosvnLdbvadmEhnv8" target="_blank" class="btn-vote">🗳️ VOTAR MVP AHORA</a>
+<a href="https://forms.gle/mpKEWQA7E3eBatUp9" target="_blank" class="btn-vote">🗳️ VOTAR MVP AHORA</a>
 
 <div class="grid-container">
-  
   <div class="card money-card">
     <h3>💰 FONDO COMÚN</h3>
     <div class="money-amount" id="moneyDisplay">$0</div>
@@ -103,7 +170,7 @@
 
   <div class="card champion-card">
     <h3>🏆 CAMPEÓN 2025</h3>
-    <img src="campeon.jpg" alt="Campeón Vigente" class="champion-img">
+    <img src="campeon.jpg" alt="Campeón Vigente" class="champion-img" onerror="this.src='default.jpg'">
     <h2 style="margin:5px 0; color:var(--secondary)">LA DEMENCIA</h2>
     <p style="font-size:0.9em; opacity:0.8">Defenderá el título esta temporada.</p>
   </div>
@@ -152,7 +219,7 @@
 <div id="playerModal" class="modal">
   <div class="player-card">
     <span class="close-modal" onclick="closeModal()">&times;</span>
-    <div class="photo-frame"><img id="modalFoto" src="" alt="Foto"></div>
+    <div class="photo-frame"><img id="modalFoto" src="" alt="Foto" onerror="this.src='default.jpg'"></div>
     <h2 id="modalName" style="margin:10px 0; text-transform:uppercase"></h2>
     
     <div style="background:rgba(255,255,255,0.2); padding:10px; border-radius:10px; display:grid; grid-template-columns: 1fr 1fr; gap:5px; text-align: left;">
@@ -168,6 +235,7 @@
 </div>
 
 <script>
+  // --- CUENTA REGRESIVA ---
   function updateCountdown() {
     const now = new Date();
     const nextSunday = new Date();
@@ -180,22 +248,20 @@
     document.getElementById("countdown").innerText = days > 0 ? `Faltan ${days} días y ${hours} horas para el Domingo` : `¡HOY SE JUEGA! ⚽ Faltan ${hours} horas`;
   }
   updateCountdown();
+  setInterval(updateCountdown, 60000); 
 
+  // --- RENDERIZADO PRINCIPAL ---
   if(typeof PLAYERS !== 'undefined') {
     document.getElementById("matchesCount").innerText = TOTAL_MATCHES;
-
     if(typeof FONDO_COMUN !== 'undefined') {
         document.getElementById("moneyDisplay").innerText = "$" + FONDO_COMUN.toLocaleString('es-AR');
     }
 
     const data = Object.entries(PLAYERS).map(([name, d]) => {
-      // --- NUEVA FORMULA ---
-      // 30 PJ + 20 WIN + 50 MVP + 20 GOLFECHA + BONUS HISTÓRICO
       const score = (d.matches * 30) + (d.wins * 20) + (d.mvp * 50) + (d.goalFech * 20) + (d.bonus || 0);
       return { name, ...d, score };
     }).sort((a, b) => b.score - a.score);
 
-    // Llenar Top 5
     data.slice(0, 5).forEach((p, i) => {
       const medals = ["🥇", "🥈", "🥉", "4°", "5°"];
       document.getElementById("top5List").innerHTML += `
@@ -220,15 +286,8 @@
 
     data.forEach((p, i) => {
       const hasStreak = p.name === lastMVP ? '<span class="streak-fire">🔥</span>' : '';
-      
-      let percent = 0;
-      if (TOTAL_MATCHES > 0) {
-        percent = Math.round((p.matches / TOTAL_MATCHES) * 100);
-      }
-
-      let percentColor = "#e74c3c";
-      if(percent >= 50) percentColor = "#f39c12"; 
-      if(percent >= 80) percentColor = "#2ecc71";
+      let percent = TOTAL_MATCHES > 0 ? Math.round((p.matches / TOTAL_MATCHES) * 100) : 0;
+      let percentColor = percent >= 80 ? "#2ecc71" : (percent >= 50 ? "#f39c12" : "#e74c3c");
 
       const row = document.createElement("tr");
       row.onclick = () => openModal(p);
@@ -255,21 +314,39 @@
           borderWidth: 0
         }]
       },
-      options: { 
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { 
-            legend: { position: 'right', labels: { color: 'white', boxWidth: 10 } } 
-        } 
-      }
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: 'white', boxWidth: 10 } } } }
     });
+
+    // --- PREPARAR PANEL ADMIN CON CHECKBOXES ---
+    const names = Object.keys(PLAYERS).sort();
+    
+    const asisDiv = document.getElementById("admAsistencia");
+    const winsDiv = document.getElementById("admGanadores");
+    const mvpSel = document.getElementById("admMvp");
+    const golSel = document.getElementById("admGol");
+
+    mvpSel.innerHTML = '<option value="">Ninguno</option>';
+    golSel.innerHTML = '<option value="">Ninguno</option>';
+
+    names.forEach(n => {
+        // Llenar checkboxes
+        asisDiv.innerHTML += `<label><input type="checkbox" name="chkAsistencia" value="${n}"> ${n}</label>`;
+        winsDiv.innerHTML += `<label><input type="checkbox" name="chkGanadores" value="${n}"> ${n}</label>`;
+        
+        // Llenar selects de MVP y Gol
+        mvpSel.innerHTML += `<option value="${n}">${n}</option>`;
+        golSel.innerHTML += `<option value="${n}">${n}</option>`;
+    });
+
+    document.getElementById("admTotalMatches").value = TOTAL_MATCHES;
+    document.getElementById("admFondo").value = FONDO_COMUN;
   }
 
   function openModal(p) {
     document.getElementById("modalName").innerText = p.name;
     document.getElementById("modalPJ").innerText = p.matches;
     document.getElementById("modalPG").innerText = p.wins;
-    document.getElementById("modalGF").innerText = p.goalFech; // Nuevo
+    document.getElementById("modalGF").innerText = p.goalFech;
     document.getElementById("modalMVP").innerText = p.mvp;
     document.getElementById("modalPTS").innerText = p.score;
     document.getElementById("modalFoto").src = p.foto || 'default.jpg';
@@ -277,6 +354,47 @@
   }
   function closeModal() { document.getElementById("playerModal").style.display = "none"; }
   window.onclick = function(event) { if (event.target == document.getElementById("playerModal")) closeModal(); }
+
+  // --- FUNCIONES ADMIN ---
+  function openAdmin() {
+    if(prompt("Contraseña:") === "fyp2026") document.getElementById("adminPanel").style.display = "block";
+    else alert("Error.");
+  }
+
+  function processData() {
+    let newTotal = parseInt(document.getElementById("admTotalMatches").value);
+    let newFondo = parseInt(document.getElementById("admFondo").value);
+    
+    // Capturar valores de los checkboxes tildados
+    let asis = Array.from(document.querySelectorAll('input[name="chkAsistencia"]:checked')).map(cb => cb.value);
+    let wins = Array.from(document.querySelectorAll('input[name="chkGanadores"]:checked')).map(cb => cb.value);
+    
+    let mvp = document.getElementById("admMvp").value;
+    let gol = document.getElementById("admGol").value;
+    
+    let fecha = document.getElementById("admFechaPartido").value;
+    let resultado = document.getElementById("admResultadoPartido").value;
+
+    let updatedPlayers = JSON.parse(JSON.stringify(PLAYERS));
+
+    asis.forEach(n => updatedPlayers[n].matches++);
+    wins.forEach(n => updatedPlayers[n].wins++);
+    if(mvp) updatedPlayers[mvp].mvp++;
+    if(gol) updatedPlayers[gol].goalFech++;
+
+    let updatedHistory = JSON.parse(JSON.stringify(MATCH_HISTORY));
+    if(fecha && resultado) {
+        updatedHistory.push({ fecha: fecha, resultado: resultado, mvp: mvp || "???" });
+    }
+
+    let finalCode = `const TOTAL_MATCHES = ${newTotal};\nconst FONDO_COMUN = ${newFondo};\n\nconst PLAYERS = ${JSON.stringify(updatedPlayers, null, 2)};\n\nconst MATCH_HISTORY = ${JSON.stringify(updatedHistory, null, 2)};`;
+    
+    const out = document.getElementById("outputJson");
+    out.value = finalCode;
+    out.style.display = "block";
+    out.select();
+    alert("¡Código generado!\n\n1. Copiá todo el texto verde del cuadro negro.\n2. Pegalo en tu archivo data.js reemplazando todo lo anterior.");
+  }
 </script>
 </body>
 </html>
