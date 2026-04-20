@@ -52,7 +52,7 @@ const PLAYERS = {
   },
   "Fran": {
     "matches": 14,
-    "mvp": 2,
+    "mvp": 3,
     "wins": 6,
     "goalFech": 0,
     "foto": "Fran.jpg",
@@ -126,7 +126,7 @@ const PLAYERS = {
     "matches": 12,
     "mvp": 1,
     "wins": 3,
-    "goalFech": 2,
+    "goalFech": 3,
     "foto": "Vegui.jpg",
     "bonus": 0
   },
@@ -265,6 +265,6 @@ const MATCH_HISTORY = [
   {
     "fecha": "12 Abr",
     "resultado": "Pechera 7 - Sin pechera 3",
-    "mvp": "???"
+    "mvp": "Fran"
   }
 ];
