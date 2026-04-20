@@ -1,5 +1,5 @@
 const TOTAL_MATCHES = 15;
-const FONDO_COMUN = 6081;
+const FONDO_COMUN = 60081;
 
 const PLAYERS = {
   "Kippes": {
